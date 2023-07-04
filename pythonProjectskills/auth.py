@@ -23,7 +23,7 @@ class Ui_autorisation(object):
         autorisation.setMinimumSize(QtCore.QSize(440, 141))
         autorisation.setMaximumSize(QtCore.QSize(440, 141))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("icon.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("../3-PO/autorisation-main/pythonProject1/icon.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         autorisation.setWindowIcon(icon)
         autorisation.setStyleSheet("font: 14pt \"Calibri\";")
         self.verticalLayout = QtWidgets.QVBoxLayout(autorisation)
@@ -38,6 +38,9 @@ class Ui_autorisation(object):
         self.login_btn = QtWidgets.QPushButton(autorisation)
         self.login_btn.setObjectName("login_btn")
         self.verticalLayout.addWidget(self.login_btn)
+        self.reg_btn = QtWidgets.QPushButton(autorisation)
+        self.reg_btn.setObjectName("reg_btn")
+        self.verticalLayout.addWidget(self.reg_btn)
 
         self.retranslateUi(autorisation)
         QtCore.QMetaObject.connectSlotsByName(autorisation)
@@ -48,6 +51,7 @@ class Ui_autorisation(object):
         self.username_value.setPlaceholderText(_translate("autorisation", "Введите логин..."))
         self.password_value.setPlaceholderText(_translate("autorisation", "Введите пароль..."))
         self.login_btn.setText(_translate("autorisation", "Войти в систему"))
+        self.reg_btn.setText(_translate("autorisation", "Зарегестрироваться"))
 
 
 if __name__ == "__main__":
