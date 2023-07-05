@@ -1,3 +1,4 @@
+import sqlite3
 import sys
 import hashlib
 from auth import Ui_autorisation
@@ -17,14 +18,19 @@ class AutoriseWin(QWidget):
         self.ui.reg_btn.clicked.connect(self.reg)
     #авторизация пользователя
     def auth(self):
+        self.passw = self.ui.password_value.text()
         with DatabaseManager("mydb.db") as conn:
             if conn:
                 cur = conn.cursor()
-                sql_query = "SELECT * FROM users WHERE username == ?"
-                sql_data = self.ui.username_value
+                sql_data = self.ui.username_value.text()
                 try:
-                    query = cur.fetchall(sql_query, sql_data)
-                    print(query)
+                    cur.execute("SELECT hashed_pass FROM users WHERE username == (?)", (sql_data,))
+                    query = cur.fetchone()
+                    if query[0]==self.passw:
+                        print('вход')
+                    else:
+                        QMessageBox.information(self, 'Ошибка',
+                                                'Неправильно введен логин или пароль!')
                 except Exception:#возможно лишнее так как таблица будет в БД
                     QMessageBox.information(self, 'Ошибка', 'Нет данных о пользователе. Проверьте правильность введенных данных')
                 conn.commit()
