@@ -42,7 +42,8 @@ class RegWin(QWidget):
                 try:
                     cur.execute(sql_query, sql_data)
                     QMessageBox.information(self, 'Успешно', 'Регистрация успешно завершена!')
-                except NameError:
+                #Обрабатывается исключение отсутствия таблицы в базе данных
+                except sqlite3.OperationalError:
                     cur.execute("""
                         CREATE TABLE users (
                             name VARCHAR(20) PRIMARY KEY,
